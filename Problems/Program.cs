@@ -6,20 +6,29 @@ namespace Problems
     {
         static void Main(string[] args)
         {
-            string input = Console.Read().ToString();
-            Console.WriteLine(Prefix(input));
+            Program P = new Program();
+            Console.WriteLine(P.Prefix("Hello World"));
         }
 
-        static string Prefix(string input)
+         public string Prefix(string input)
         {
             int length = input.Length;
 
             if (input == null)
-                    return null;
+                return null;
             if (input == "")
-                    return "0.0:";
+                return "0,0:";
 
-            return $"{length},{input.Split(' ').Length}:";
+            string Words = "";
+            
+            foreach (string j in input.Split(' '))
+            { 
+                if (j.Length >= 1)
+                {
+                    Words += j + " ";
+                }
+            }
+            return $"{length},{Words.Split(" ").Length - 1}:";
         }
     }
 }
