@@ -28,7 +28,7 @@ namespace Problems
                     Words += j + " ";
                 }
             }
-            return $"{length},{Words.Split(" ").Length - 1}:";
+            return $"{length},{Words.Split(" ").Length - 1}:{input}";
         }
     }
 }

@@ -1,38 +1,35 @@
 using NUnit.Framework;
 using Problems;
+using System.Collections;
 
 namespace Tests
 {
+    [TestFixture]
     public class Tests
     {
         
-        [SetUp]
-        public void Setup()
-        {
-        }
-
-        [Test]
-        public void Test1()
+        [TestCaseSource(typeof(MyDataClass), "TestCases")]
+        public string PrefixTest(string input)
         {
             Program P = new Program();
-            string result1 = P.Prefix("");
-            Assert.AreEqual("0,0:", result1);
+            string result = P.Prefix(input);
+            return result;
         }
+    }
 
-        [Test]
-        public void Test2()
+    public class MyDataClass
+    {
+        public static IEnumerable TestCases
         {
-            Program P = new Program();
-            string result2 = P.Prefix("hello");
-            Assert.AreEqual("5,1:", result2);
-        }
-
-        [Test]
-        public void Test3()
-        {
-            Program P = new Program();
-            string result3 = P.Prefix("what    ...  did you say?? ");
-            Assert.AreEqual("27,5:", result3);
+            get
+            {
+                yield return new TestCaseData("").Returns("0,0:");
+                yield return new TestCaseData("hello").Returns("5,1:hello");
+                yield return new TestCaseData("what    ...  did you say?? ").Returns("27,5:what    ...  did you say?? ");
+                yield return new TestCaseData("ba").Returns("2,1:ba");
+                yield return new TestCaseData("chill mate").Returns("10,2:chill mate");
+                yield return new TestCaseData(" ").Returns("1,0: ");
+            }
         }
     }
 }
